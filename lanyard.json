@@ -1,0 +1,59 @@
+{
+  "data": {
+    "kv": {},
+    "discord_user": {
+      "avatar": "684f885b1408528e531078d54d371ba0",
+      "avatar_decoration_data": {
+        "asset": "a_a2163cdb93b395b783a09d1458e28298",
+        "expires_at": null,
+        "sku_id": "1500909535668473996"
+      },
+      "bot": false,
+      "collectibles": {
+        "nameplate": {
+          "asset": "nameplates/nameplates_v2/sword_of_legend/",
+          "expires_at": null,
+          "label": "COLLECTIBLES_NAMEPLATES_V2_SWORD_OF_LEGEND_A11Y",
+          "palette": "cobalt",
+          "sku_id": "1377377712162738196"
+        }
+      },
+      "discriminator": "0",
+      "display_name": "Dobb",
+      "display_name_styles": null,
+      "global_name": "Dobb",
+      "id": "885340096272941127",
+      "primary_guild": {
+        "badge": "7cf06b1f80be8c382f178b5ad49e1867",
+        "identity_enabled": true,
+        "identity_guild_id": "1409120699259420697",
+        "tag": "˚˖𓍢"
+      },
+      "public_flags": 0,
+      "username": "zhnaw_"
+    },
+    "activities": [
+      {
+        "content_classification": {
+          "data": null,
+          "loaded": true
+        },
+        "created_at": 1781618908271,
+        "id": "custom",
+        "name": "Custom Status",
+        "session_id": "83524c580ed135f639bb23c396ee01c2",
+        "state": "A",
+        "type": 4
+      }
+    ],
+    "discord_status": "online",
+    "active_on_discord_web": false,
+    "active_on_discord_desktop": true,
+    "active_on_discord_mobile": false,
+    "active_on_discord_embedded": false,
+    "active_on_discord_vr": false,
+    "listening_to_spotify": false,
+    "spotify": null
+  },
+  "success": true
+}

@@ -1,0 +1,198 @@
+{
+  "user": {
+    "id": "885340096272941127",
+    "username": "zhnaw_",
+    "global_name": "Dobb",
+    "avatar": "684f885b1408528e531078d54d371ba0",
+    "avatar_decoration_data": {
+      "asset": "a_a2163cdb93b395b783a09d1458e28298",
+      "sku_id": "1500909535668473996",
+      "expires_at": null
+    },
+    "collectibles": {
+      "nameplate": {
+        "asset": "nameplates/nameplates_v2/sword_of_legend/",
+        "palette": "cobalt",
+        "label": "COLLECTIBLES_NAMEPLATES_V2_SWORD_OF_LEGEND_A11Y",
+        "sku_id": "1377377712162738196",
+        "expires_at": null
+      }
+    },
+    "discriminator": "0",
+    "display_name_styles": null,
+    "public_flags": 0,
+    "primary_guild": {
+      "identity_guild_id": "1409120699259420697",
+      "identity_enabled": true,
+      "tag": "˚˖𓍢",
+      "badge": "7cf06b1f80be8c382f178b5ad49e1867"
+    },
+    "clan": {
+      "identity_guild_id": "1409120699259420697",
+      "identity_enabled": true,
+      "tag": "˚˖𓍢",
+      "badge": "7cf06b1f80be8c382f178b5ad49e1867"
+    },
+    "flags": 0,
+    "banner": null,
+    "banner_color": "#f1f1f1",
+    "accent_color": 15856113,
+    "bio": "「你是我生命中唯一的妻子。「 \nhttps://guns.lol/_travis\nhttps://konect.gg/_TrAvis\n\n     ╱|、\n    (˚ˎ 。7  \n     |、˜〵          \n    じしˍ,)ノ\n 󠁛󠀣󠀰󠀰󠀰󠀰󠀰󠀰󠀬󠀣󠀰󠀰󠀰󠀰󠀰󠀰󠁝"
+  },
+  "user_profile": {
+    "bio": "「你是我生命中唯一的妻子。「 \nhttps://guns.lol/_travis\nhttps://konect.gg/_TrAvis\n\n     ╱|、\n    (˚ˎ 。7  \n     |、˜〵          \n    じしˍ,)ノ\n 󠁛󠀣󠀰󠀰󠀰󠀰󠀰󠀰󠀬󠀣󠀰󠀰󠀰󠀰󠀰󠀰󠁝",
+    "accent_color": 15856113,
+    "pronouns": "ChiYeuMinhEm",
+    "profile_effect": {
+      "sku_id": "1432550258403180644",
+      "expires_at": null
+    },
+    "collectibles": [
+      {
+        "sku_id": "1432550258403180644",
+        "type": 1,
+        "expires_at": null
+      }
+    ]
+  },
+  "legacy_username": "NamTran (đệ anh bi dái )#5414",
+  "connected_accounts": [
+    {
+      "type": "facebook",
+      "id": "1477525334074666",
+      "name": "Trần Nhật Nam",
+      "verified": true
+    },
+    {
+      "type": "leagueoflegends",
+      "id": "O0SoTwuDH1sKf1ZH3vN0UF5fwwBS79Kk0BdujmKLZtb5yU7xqgtVVhL3BwiD8s-076FzEjjNU7cuag",
+      "name": "yêu em có gì sai#2011",
+      "verified": true
+    },
+    {
+      "type": "riotgames",
+      "id": "O0SoTwuDH1sKf1ZH3vN0UF5fwwBS79Kk0BdujmKLZtb5yU7xqgtVVhL3BwiD8s-076FzEjjNU7cuag",
+      "name": "yêu em có gì sai#2011",
+      "verified": true
+    },
+    {
+      "type": "spotify",
+      "id": "31bczacuqfn2dterj362kbbjhc6e",
+      "name": "Namyt:)",
+      "verified": true
+    },
+    {
+      "type": "steam",
+      "id": "76561199199014648",
+      "name": "_TrAvis",
+      "verified": true,
+      "metadata": {
+        "created_at": "2021-08-15T01:02:06",
+        "game_count": "9",
+        "item_count_dota2": "-1",
+        "item_count_tf2": "0"
+      }
+    }
+  ],
+  "premium_since": null,
+  "premium_type": 0,
+  "premium_guild_since": null,
+  "badges": [
+    {
+      "id": "legacy_username",
+      "description": "Originally known as NamTran (đệ anh bi dái )#5414",
+      "icon": "6de6d34650760ba5551a79732e98ed60"
+    },
+    {
+      "id": "quest_completed",
+      "description": "Completed a Quest",
+      "icon": "7d9ae358c8c5e118768335dbe68b4fb8",
+      "link": "https://discord.com/discovery/quests"
+    },
+    {
+      "id": "orb_profile_badge",
+      "description": "Collected the Orb Profile Badge",
+      "icon": "83d8a1eb09a8d64e59233eec5d4d5c2d"
+    }
+  ],
+  "widgets": [
+    {
+      "id": "1495830486969352435",
+      "updated_at": "2026-05-14T02:40:32.694900+00:00",
+      "data": {
+        "type": "current_games",
+        "games": [
+          {
+            "game_id": "1402418717781921935",
+            "comment": null,
+            "tags": [
+              "better_than_you"
+            ]
+          },
+          {
+            "game_id": "1158877933042143272",
+            "comment": null,
+            "tags": [
+              "expert"
+            ]
+          },
+          {
+            "game_id": "363445589247131668",
+            "comment": null,
+            "tags": [
+              "casual"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "1485859007909466162",
+      "updated_at": "2026-03-24T04:33:13.418360+00:00",
+      "data": {
+        "type": "want_to_play_games",
+        "games": [
+          {
+            "game_id": "1442715211097440326",
+            "comment": null,
+            "tags": []
+          },
+          {
+            "game_id": "787443973538971748",
+            "comment": null,
+            "tags": []
+          },
+          {
+            "game_id": "1402418436809953330",
+            "comment": null,
+            "tags": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "1440352782308741275",
+      "updated_at": "2026-04-22T13:49:52.644596+00:00",
+      "data": {
+        "type": "favorite_games",
+        "games": [
+          {
+            "game_id": "700136079562375258",
+            "comment": null,
+            "tags": [
+              "expert",
+              "obsessed",
+              "open_to_teach"
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "wishlist_settings": {
+    "1507394291280908459": {
+      "visibility": 1,
+      "updated_at": "2026-06-08T16:05:50.652388+00:00"
+    }
+  }
+}

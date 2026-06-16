@@ -53,7 +53,7 @@ export default function Navbar() {
             try {
                 const res = await fetch(`https://api.lanyard.rest/v1/users/${DISCORD_USER_ID}`);
                 const json: LanyardResponse = await res.json();
-                
+
                 if (json.success && json.data) {
                     setDiscordStatus(json.data.discord_status);
                 }
@@ -83,15 +83,15 @@ export default function Navbar() {
         <nav className="w-full py-6 px-4 md:px-8 max-w-6xl mx-auto flex items-center justify-between relative z-50">
             {/* Logo */}
             <div className="flex items-center gap-2.5">
-                <img 
-                    src="/logo.png" 
-                    alt="TrAvis Logo" 
-                    className="h-10 sm:h-12 w-auto transition-transform sm:transform hover:-rotate-6 dark:invert-0 invert" 
+                <img
+                    src="/logo.png"
+                    alt="TrAvis Logo"
+                    className="h-20 sm:h-24 w-auto transition-transform sm:transform hover:-rotate-6 dark:invert-0 invert"
                 />
             </div>
 
             {/* Menu bên phải */}
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3 bg-black/5 dark:bg-white/10 backdrop-blur-md border border-black/10 dark:border-white/10 px-3 py-1.5 rounded-2xl shadow-sm">
                 {/* Discord Dynamic Live Status Badge (Dot Only) */}
                 {isMounted && (
                     <a

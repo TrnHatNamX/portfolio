@@ -1,27 +1,21 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import FluidSand from '../components/FluidSand';
-import InfiniteMarquee from '../components/InfiniteMarquee';
-import FloatingCard from '../components/FloatingCard';
+import FloatingCard from '../components/cards/FloatingCard';
 import { Heart, AtSign, Music } from 'lucide-react';
-import Navbar from '../components/Navbar';
+import Navbar from '../components/layout/Navbar';
+import DiscordProfileCard from '../components/cards/DiscordProfileCard';
+import OrbitingTechStack from '../components/ui/OrbitingTechStack';
 
 const fullStackIcons = [
   { name: 'TypeScript', class: 'devicon-typescript-plain' },
   { name: 'React', class: 'devicon-react-original' },
   { name: 'Vue', class: 'devicon-vuejs-plain' },
   { name: 'Tailwind', class: 'devicon-tailwindcss-plain' },
-  { name: 'Node.js', class: 'devicon-nodejs-line-wordmark' },
+  { name: 'Node.js', class: 'devicon-nodejs-plain' },
   { name: 'Docker', class: 'devicon-docker-plain' },
   { name: 'Git', class: 'devicon-git-plain' },
   { name: 'Next.js', class: 'devicon-nextjs-plain' },
-  { name: 'Nuxt', class: 'devicon-nuxtjs-plain' },
-  { name: 'Three.js', class: 'devicon-threejs-original' },
-  { name: 'Express', class: 'devicon-express-original' },
-  { name: 'MySQL', class: 'devicon-mysql-original' },
-  { name: 'AWS', class: 'devicon-amazonwebservices-plain-wordmark' },
-  { name: 'GitHub', class: 'devicon-github-original' },
 ];
 
 const gameDesignIcons = [
@@ -30,6 +24,7 @@ const gameDesignIcons = [
   { name: 'C#', class: 'devicon-csharp-plain' },
   { name: 'Go', class: 'devicon-go-original-wordmark' },
   { name: 'Photoshop', class: 'devicon-photoshop-plain' },
+  { name: 'Three.js', class: 'devicon-threejs-original' },
 ];
 
 export default function Home() {
@@ -62,88 +57,54 @@ export default function Home() {
 
   return (
     <div className="min-h-screen relative overflow-hidden flex flex-col transition-colors duration-300">
-      {/* Dynamic Nexus Background */}
-      <FluidSand />
+      {/* Background Image with Invert for Dark Mode */}
+      <div 
+        className="fixed inset-0 z-0 bg-cover bg-center transition-all duration-500 dark:invert"
+        style={{ backgroundImage: "url('/background.png')" }} 
+      />
 
       {/* Main Content Overlay */}
       <div className="relative z-10 w-full flex-grow flex flex-col items-center pb-8 sm:pb-12 md:my-0 justify-start">
         <Navbar />
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-0 flex items-center justify-center gap-8 lg:gap-16 w-full pt-12 md:pt-24">
+        <div className="max-w-[1600px] mx-auto px-4 sm:px-6 flex items-center justify-between gap-4 lg:gap-32 w-full pt-0 flex-1">
 
           {/* Left Cards */}
-          <div className="hidden lg:flex flex-col gap-4 w-2/12 z-10">
+          <div className="hidden lg:flex flex-col gap-[200px] w-2/12 z-10 items-center">
             {cards.slice(0, 2).map((card, idx) => (
               <FloatingCard
                 key={idx}
                 title={card.title}
                 href={card.href}
                 icon={card.icon}
-                className={`w-32 h-32 ${idx % 2 === 0 ? 'ml-auto' : ''} ${idx === 0 ? 'rotate-2' : '-rotate-3'}`}
+                className={`w-[186px] h-[186px] ${idx === 0 ? 'rotate-2' : '-rotate-3'}`}
               />
             ))}
           </div>
 
-          {/* Center Hero */}
-          <header className="flex-1 z-10 w-full flex flex-col justify-center">
-            <div className="space-y-6 sm:space-y-8 z-10">
-              <div className="space-y-3 sm:space-y-4">
-                <h1 className="font-semibold text-center text-base sm:text-lg text-black/50 dark:text-white/50 md:text-xl flex items-center justify-center flex-wrap gap-2">
-                  <span>Hi, I am</span>
-                  <span className="text-black/80 select-none dark:text-white/90 transition-colors backdrop-blur-md bg-white/30 dark:bg-neutral-800/30 ring-1 ring-black/10 dark:ring-white/10 rounded-full py-2 sm:py-2.5 pl-4 pr-5 gap-1 inline-flex items-center w-max font-medium text-sm sm:text-base">
-                    TrAvis
-                  </span>
-                </h1>
-
-                <div className="flex flex-col items-center w-full max-w-5xl mx-auto px-4 sm:px-6 md:px-8">
-                  <div className="inline-flex flex-col items-center mt-2">
-                    <h1 className="font-bold text-3xl sm:text-4xl md:text-5xl text-black/90 dark:text-white/90 lg:text-6xl text-center block sm:whitespace-nowrap tracking-tight">
-                      Full-Stack Developer
-                    </h1>
-                    <span className="block text-lg sm:text-xl md:text-2xl lg:text-3xl opacity-60 mt-1 sm:mt-2 sm:whitespace-nowrap font-semibold text-black/90 dark:text-white/90 text-right w-full tracking-tight">
-                      Game & AI Controller
-                    </span>
-                  </div>
-                </div>
-              </div>
+          {/* Center Hero: Discord Card + Orbiting Stack */}
+          <main className="flex-1 z-10 w-full flex flex-col items-center justify-center relative min-h-[550px]">
+            
+            {/* Outer and Inner Orbits */}
+            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+              <OrbitingTechStack icons={fullStackIcons} radius={290} duration={45} reverse={false} />
+              <OrbitingTechStack icons={gameDesignIcons} radius={390} duration={60} reverse={true} />
             </div>
 
-            <div className="mt-12 sm:mt-16 flex flex-col items-center justify-center gap-y-6">
-              {/* Marquee 1 */}
-              <div className="flex flex-col items-center gap-y-3 w-full max-w-lg">
-                <span className="text-[10px] sm:text-xs text-black/40 dark:text-white/40 font-semibold tracking-[0.2em] uppercase">
-                  Full-Stack Development
-                </span>
-                <InfiniteMarquee direction="left" speed={40}>
-                  {fullStackIcons.map((icon, idx) => (
-                    <i key={idx} className={`${icon.class} text-black dark:text-white`} style={{ fontSize: 32, margin: '0 24px' }} title={icon.name} />
-                  ))}
-                </InfiniteMarquee>
-              </div>
+            {/* Central Discord Profile Card */}
+            <DiscordProfileCard />
 
-              {/* Marquee 2 */}
-              <div className="flex flex-col items-center gap-y-3 w-full max-w-lg pt-4">
-                <span className="text-[10px] sm:text-xs text-black/40 dark:text-white/40 font-semibold tracking-[0.2em] uppercase">
-                  Game Development & Design
-                </span>
-                <InfiniteMarquee direction="right" speed={40}>
-                  {gameDesignIcons.map((icon, idx) => (
-                    <i key={idx} className={`${icon.class} text-black dark:text-white`} style={{ fontSize: 32, margin: '0 24px' }} title={icon.name} />
-                  ))}
-                </InfiniteMarquee>
-              </div>
-            </div>
-          </header>
+          </main>
 
           {/* Right Cards */}
-          <div className="hidden lg:flex flex-col gap-4 w-2/12 z-10">
+          <div className="hidden lg:flex flex-col gap-[200px] w-2/12 z-10 items-center">
             {cards.slice(2, 4).map((card, idx) => (
               <FloatingCard
                 key={idx}
                 title={card.title}
                 href={card.href}
                 icon={card.icon}
-                className={`w-32 h-32 ${idx % 2 !== 0 ? 'ml-auto' : ''} ${idx === 0 ? '-rotate-2' : 'rotate-3'}`}
+                className={`w-[186px] h-[186px] ${idx === 0 ? '-rotate-2' : 'rotate-3'}`}
               />
             ))}
           </div>
