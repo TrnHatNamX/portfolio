@@ -1,11 +1,13 @@
-'use client';
-
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import dynamic from 'next/dynamic';
+import Image from 'next/image';
 import FloatingCard from '../components/cards/FloatingCard';
 import { Heart, AtSign, Music } from 'lucide-react';
 import Navbar from '../components/layout/Navbar';
 import DiscordProfileCard from '../components/cards/DiscordProfileCard';
 import OrbitingTechStack from '../components/ui/OrbitingTechStack';
+
+const Footer = dynamic(() => import('../components/layout/Footer'));
 
 const fullStackIcons = [
   { name: 'TypeScript', class: 'devicon-typescript-plain' },
@@ -28,25 +30,6 @@ const gameDesignIcons = [
 ];
 
 export default function Home() {
-  const [isDark, setIsDark] = useState(true);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsDark(document.documentElement.classList.contains('dark'));
-    }, 0);
-    const observer = new MutationObserver((mutations) => {
-      mutations.forEach((mutation) => {
-        if (mutation.attributeName === 'class') {
-          setIsDark(document.documentElement.classList.contains('dark'));
-        }
-      });
-    });
-    observer.observe(document.documentElement, { attributes: true });
-    return () => {
-      clearTimeout(timer);
-      observer.disconnect();
-    };
-  }, []);
 
   const cards = [
     { title: "Donate", href: "https://buymeacoffee.com/travis__", icon: <Heart /> },
@@ -58,13 +41,19 @@ export default function Home() {
   return (
     <div className="min-h-screen relative overflow-hidden flex flex-col transition-colors duration-300">
       {/* Background Image with Invert for Dark Mode */}
-      <div 
-        className="fixed inset-0 z-0 bg-cover bg-center transition-all duration-500 dark:invert"
-        style={{ backgroundImage: "url('/background.png')" }} 
-      />
+      <div className="fixed inset-0 z-0 transition-all duration-500 dark:invert pointer-events-none">
+        <Image 
+          src="/background.png" 
+          alt="Background" 
+          fill 
+          priority
+          quality={75}
+          className="object-cover" 
+        />
+      </div>
 
       {/* Main Content Overlay */}
-      <div className="relative z-10 w-full flex-grow flex flex-col items-center pb-8 sm:pb-12 md:my-0 justify-start">
+      <div className="relative z-10 w-full min-h-screen flex flex-col items-center pb-8 sm:pb-12 md:my-0 justify-start">
         <Navbar />
 
         <div className="max-w-[1600px] mx-auto px-4 sm:px-6 flex items-center justify-between gap-4 lg:gap-32 w-full pt-0 flex-1">
@@ -87,8 +76,8 @@ export default function Home() {
             
             {/* Outer and Inner Orbits */}
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-              <OrbitingTechStack icons={fullStackIcons} radius={290} duration={45} reverse={false} />
-              <OrbitingTechStack icons={gameDesignIcons} radius={390} duration={60} reverse={true} />
+              <OrbitingTechStack icons={fullStackIcons} radius={320} duration={45} reverse={false} />
+              <OrbitingTechStack icons={gameDesignIcons} radius={430} duration={60} reverse={true} />
             </div>
 
             {/* Central Discord Profile Card */}
@@ -123,6 +112,7 @@ export default function Home() {
           ))}
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

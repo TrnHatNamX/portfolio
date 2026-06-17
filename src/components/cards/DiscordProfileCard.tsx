@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState, useRef } from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import Image from 'next/image';
 
 const DISCORD_ID = "885340096272941127";
 
@@ -9,8 +10,8 @@ export default function DiscordProfileCard() {
   interface LanyardData {
     discord_user?: { avatar: string; id: string; username: string };
     discord_status?: string;
-    activities?: Array<{ type: number; id: string; name: string; state?: string; emoji?: { id?: string; name?: string; animated?: boolean } }>;
-    spotify?: { song: string; artist: string };
+    activities?: Array<{ type: number; id: string; name: string; state?: string; details?: string; emoji?: { id?: string; name?: string; animated?: boolean }; assets?: any; application_id?: string }>;
+    spotify?: { song: string; artist: string; album_art_url?: string };
   }
   interface DstnData {
     user?: {
@@ -38,16 +39,20 @@ export default function DiscordProfileCard() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [lanRes, dstnRes] = await Promise.all([
-          fetch(`https://api.lanyard.rest/v1/users/${DISCORD_ID}`).then(r => r.json()),
-          fetch(`https://dcdn.dstn.to/profile/${DISCORD_ID}`).then(r => r.json())
-        ]);
-        
-        if (lanRes.success) setLanyard(lanRes.data);
-        if (dstnRes.user) setDstn(dstnRes);
+        const fetchLanyard = fetch(`https://api.lanyard.rest/v1/users/${DISCORD_ID}`)
+          .then(r => r.ok ? r.json() : { success: false })
+          .catch(() => ({ success: false }));
+
+        const fetchDstn = fetch(`https://dcdn.dstn.to/profile/${DISCORD_ID}`)
+          .then(r => r.ok ? r.json() : {})
+          .catch(() => ({}));
+
+        const [lanRes, dstnRes] = await Promise.all([fetchLanyard, fetchDstn]);
+
+        if (lanRes?.success) setLanyard(lanRes.data);
+        if (dstnRes?.user) setDstn(dstnRes);
         setLoading(false);
       } catch (e) {
-        console.error("Error fetching Discord data:", e);
         setLoading(false);
       }
     };
@@ -78,7 +83,7 @@ export default function DiscordProfileCard() {
   if (loading) return null;
 
   // Extracted Data
-  const avatarUrl = lanyard?.discord_user?.avatar 
+  const avatarUrl = lanyard?.discord_user?.avatar
     ? `https://cdn.discordapp.com/avatars/${DISCORD_ID}/${lanyard.discord_user.avatar}.${lanyard.discord_user.avatar.startsWith('a_') ? 'gif' : 'png'}?size=128`
     : `https://cdn.discordapp.com/embed/avatars/0.png`;
 
@@ -88,15 +93,25 @@ export default function DiscordProfileCard() {
 
   const badges = dstn?.badges || [];
   const clan = dstn?.user?.clan || dstn?.user?.primary_guild;
-  
+
   const customStatus = lanyard?.activities?.find((a) => a.type === 4 || a.id === "custom");
   let statusText = "Đang không làm gì cả :D";
-  
+
   const playingActivity = lanyard?.activities?.find((a) => a.type === 0);
-  if (lanyard?.spotify) {
-    statusText = `Listening to ${lanyard.spotify.song}`;
-  } else if (playingActivity) {
-    statusText = `Playing ${playingActivity.name}`;
+
+  let activityImgUrl = '';
+  if (playingActivity && playingActivity.assets?.large_image) {
+    const imgId = playingActivity.assets.large_image;
+    if (imgId.startsWith('mp:external')) {
+      activityImgUrl = `https://media.discordapp.net/external/${imgId.replace('mp:external/', '')}`;
+    } else {
+      activityImgUrl = `https://cdn.discordapp.com/app-assets/${playingActivity.application_id}/${imgId}.png`;
+    }
+  }
+
+  let spotifyImgUrl = '';
+  if (lanyard?.spotify?.album_art_url) {
+    spotifyImgUrl = lanyard.spotify.album_art_url;
   }
 
   // Get status dot color
@@ -120,26 +135,29 @@ export default function DiscordProfileCard() {
       <div className="absolute inset-0 bg-gradient-to-b from-white/90 to-white/60 dark:from-black/80 dark:to-black/50 backdrop-blur-3xl z-0 border border-black/10 dark:border-white/10" />
 
       {/* Solid Top Banner portion */}
-      <div className="absolute top-0 left-0 w-full h-[120px] bg-black/5 dark:bg-white/5 z-0 border-b border-black/5 dark:border-white/5" />
+      <div className="absolute top-0 left-0 w-full h-[144px] bg-black/5 dark:bg-white/5 z-0 border-b border-black/5 dark:border-white/5" />
 
-      <div className="relative z-10 p-6 pt-10 flex flex-col gap-6" style={{ transform: "translateZ(30px)" }}>
-        
+      <div className="relative z-10 p-6 pt-16 flex flex-col gap-6" style={{ transform: "translateZ(30px)" }}>
+
         {/* Header: Avatar, Status Bubble, and Badges */}
         <div className="flex justify-between items-start">
-          
+
           <div className="relative">
             {/* Avatar Frame Wrapper */}
             <div className="relative w-24 h-24">
-              <img 
-                src={avatarUrl} 
-                alt="Avatar" 
-                className="w-[74px] h-[74px] rounded-full object-cover absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 border-[4px] border-white dark:border-black" 
+              <Image
+                src={avatarUrl}
+                alt="Avatar"
+                width={74}
+                height={74}
+                className="w-[74px] h-[74px] rounded-full object-cover absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 border-[4px] border-white dark:border-black"
               />
               {avatarDecoration && (
-                <img 
-                  src={avatarDecoration} 
-                  alt="Decoration" 
-                  className="absolute inset-0 w-full h-full scale-[1.2] pointer-events-none" 
+                <Image
+                  src={avatarDecoration}
+                  alt="Decoration"
+                  fill
+                  className="scale-[1.2] pointer-events-none object-cover"
                 />
               )}
               {/* Status Dot */}
@@ -150,7 +168,7 @@ export default function DiscordProfileCard() {
             {customStatus && (
               <div className="absolute -bottom-1 -right-16 translate-x-4 bg-white/90 dark:bg-zinc-800/90 backdrop-blur-md rounded-xl px-3 py-1.5 flex items-center gap-1.5 shadow-lg border border-black/5 dark:border-white/5 whitespace-nowrap z-20">
                 {customStatus.emoji?.id ? (
-                  <img src={`https://cdn.discordapp.com/emojis/${customStatus.emoji.id}.${customStatus.emoji.animated ? 'gif' : 'png'}`} className="w-4 h-4" alt="emoji" />
+                  <Image src={`https://cdn.discordapp.com/emojis/${customStatus.emoji.id}.${customStatus.emoji.animated ? 'gif' : 'png'}`} width={16} height={16} className="w-4 h-4 object-contain" alt="emoji" />
                 ) : customStatus.emoji?.name ? (
                   <span className="text-sm">{customStatus.emoji.name}</span>
                 ) : (
@@ -164,11 +182,13 @@ export default function DiscordProfileCard() {
           {/* Badges Container */}
           <div className="flex flex-wrap items-center justify-end gap-1.5 w-[140px] mt-16 bg-white/50 dark:bg-zinc-800/50 backdrop-blur-sm rounded-xl p-1.5 border border-black/5 dark:border-white/10 shadow-sm">
             {badges.map((badge, i) => (
-              <img 
-                key={i} 
-                src={`https://cdn.discordapp.com/badge-icons/${badge.icon}.png`} 
-                alt={badge.description} 
-                className="w-[22px] h-[22px]" 
+              <Image
+                key={i}
+                src={`https://cdn.discordapp.com/badge-icons/${badge.icon}.png`}
+                alt={badge.description}
+                width={22}
+                height={22}
+                className="w-[22px] h-[22px] object-contain"
                 title={badge.description}
               />
             ))}
@@ -177,14 +197,14 @@ export default function DiscordProfileCard() {
         </div>
 
         {/* User Info Card with New Titles */}
-        <div className="mt-2 flex-grow bg-black/5 dark:bg-black/30 backdrop-blur-md rounded-2xl p-8 shadow-inner border border-black/5 dark:border-white/10 flex flex-col items-center justify-center text-center gap-4 min-h-[260px]">
-          
+        <div className="mt-2 flex-grow bg-black/5 dark:bg-black/30 backdrop-blur-md rounded-2xl p-8 shadow-inner border border-black/5 dark:border-white/10 flex flex-col items-center justify-center text-center gap-4 min-h-[312px]">
+
           <div className="flex items-center gap-2 mb-1">
             <h1 className="text-2xl font-bold tracking-wide text-black dark:text-white">{lanyard?.discord_user?.username || 'niang1_'}</h1>
             {clan && (
               <div className="flex items-center gap-1 bg-black/10 dark:bg-black/40 backdrop-blur-md rounded-md px-2 py-0.5 border border-black/5 dark:border-white/10">
                 {clan.badge && (
-                  <img src={`https://cdn.discordapp.com/clan-badges/${clan.identity_guild_id}/${clan.badge}.png`} alt="Clan Badge" className="w-4 h-4" />
+                  <Image src={`https://cdn.discordapp.com/clan-badges/${clan.identity_guild_id}/${clan.badge}.png`} alt="Clan Badge" width={16} height={16} className="w-4 h-4 object-contain" />
                 )}
                 <span className="text-xs font-bold text-black/90 dark:text-white/90">{clan.tag}</span>
               </div>
@@ -197,9 +217,34 @@ export default function DiscordProfileCard() {
             <h3 className="text-[11px] font-semibold text-black/60 dark:text-white/50 uppercase tracking-widest">AI & Server</h3>
           </div>
 
-          <div className="w-full h-px bg-black/10 dark:bg-white/10 my-4" />
-
-          <p className="text-black/70 dark:text-white/80 font-medium text-sm italic">{statusText}</p>
+          {/* Detailed Activity Block */}
+          {lanyard?.spotify ? (
+            <div className="w-full flex items-center gap-3 bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/10 rounded-xl p-3 text-left animate-fadeIn">
+              <Image src={spotifyImgUrl || 'https://via.placeholder.com/56/1e2128/ffffff?text=Spotify'} width={56} height={56} className="w-14 h-14 rounded-lg object-cover" alt="Spotify" />
+              <div className="flex flex-col overflow-hidden min-w-0">
+                <span className="font-bold text-[0.95rem] text-black dark:text-white truncate">{lanyard.spotify.song}</span>
+                <span className="text-[0.8rem] text-black/70 dark:text-white/70 truncate">by {lanyard.spotify.artist}</span>
+              </div>
+            </div>
+          ) : playingActivity ? (
+            <div className="w-full flex items-center gap-3 bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/10 rounded-xl p-3 text-left animate-fadeIn">
+              <Image src={activityImgUrl || 'https://via.placeholder.com/56/1e2128/ffffff?text=App'} width={56} height={56} className="w-14 h-14 rounded-lg object-cover bg-black/10 dark:bg-white/10" alt="Activity" />
+              <div className="flex flex-col overflow-hidden min-w-0">
+                <span className="font-bold text-[0.95rem] text-black dark:text-white truncate">{playingActivity.name}</span>
+                {playingActivity.details && (
+                  <span className="text-[0.8rem] text-black/70 dark:text-white/70 truncate">{playingActivity.details}</span>
+                )}
+                {playingActivity.state && (
+                  <span className="text-[0.8rem] text-black/70 dark:text-white/70 truncate">{playingActivity.state}</span>
+                )}
+              </div>
+            </div>
+          ) : (
+            <>
+              <div className="w-full h-px bg-black/10 dark:bg-white/10 my-4" />
+              <p className="text-black/70 dark:text-white/80 font-medium text-sm italic">Đang không làm gì cả :D</p>
+            </>
+          )}
 
         </div>
 

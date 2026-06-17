@@ -1,5 +1,5 @@
 // src/components/ProjectCard.tsx
-import { Project } from '../types';
+import { Project } from '../../types';
 import { ExternalLink, Gamepad2 } from 'lucide-react';
 
 interface ProjectCardProps {

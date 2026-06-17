@@ -1,8 +1,8 @@
-// src/components/Navbar.tsx
 'use client';
 
 import { useEffect, useState } from 'react';
 import { Sun, Moon } from 'lucide-react';
+import Image from 'next/image';
 
 // Cấu hình ID Discord của bạn ở đây.
 // Mặc định sử dụng ID mẫu: 885340096272941127
@@ -52,13 +52,14 @@ export default function Navbar() {
         const fetchStatus = async () => {
             try {
                 const res = await fetch(`https://api.lanyard.rest/v1/users/${DISCORD_USER_ID}`);
-                const json: LanyardResponse = await res.json();
-
-                if (json.success && json.data) {
-                    setDiscordStatus(json.data.discord_status);
+                if (res.ok) {
+                    const json: LanyardResponse = await res.json();
+                    if (json.success && json.data) {
+                        setDiscordStatus(json.data.discord_status);
+                    }
                 }
             } catch (err) {
-                console.error('Lỗi khi tải trạng thái Lanyard Discord API:', err);
+                // Ignore network errors silently to prevent Next.js overlay
             }
         };
 
@@ -83,9 +84,12 @@ export default function Navbar() {
         <nav className="w-full py-6 px-4 md:px-8 max-w-6xl mx-auto flex items-center justify-between relative z-50">
             {/* Logo */}
             <div className="flex items-center gap-2.5">
-                <img
+                <Image
                     src="/logo.png"
                     alt="TrAvis Logo"
+                    width={200}
+                    height={96}
+                    priority
                     className="h-20 sm:h-24 w-auto transition-transform sm:transform hover:-rotate-6 dark:invert-0 invert"
                 />
             </div>
