@@ -22,7 +22,7 @@ interface LanyardResponse {
 }
 
 export default function Navbar() {
-    const [theme, setTheme] = useState<'light' | 'dark'>('dark');
+    const [theme, setTheme] = useState<'light' | 'dark'>('light');
     const [isMounted, setIsMounted] = useState(false);
     const [discordStatus, setDiscordStatus] = useState<'online' | 'idle' | 'dnd' | 'offline'>('offline');
 
@@ -31,7 +31,7 @@ export default function Navbar() {
         const timer = setTimeout(() => {
             setIsMounted(true);
             const savedTheme = localStorage.getItem('theme') as 'light' | 'dark' | null;
-            const initialTheme = savedTheme || 'dark';
+            const initialTheme = savedTheme || 'light';
             setTheme(initialTheme);
             document.documentElement.classList.toggle('dark', initialTheme === 'dark');
         }, 0);
