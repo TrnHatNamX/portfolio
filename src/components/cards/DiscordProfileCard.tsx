@@ -50,7 +50,7 @@ export default function DiscordProfileCard() {
         const [lanRes, dstnRes] = await Promise.all([fetchLanyard, fetchDstn]);
 
         if (lanRes?.success) setLanyard(lanRes.data);
-        if (dstnRes?.user) setDstn(dstnRes);
+        if ((dstnRes as DstnData)?.user) setDstn(dstnRes as DstnData);
         setLoading(false);
       } catch (e) {
         setLoading(false);

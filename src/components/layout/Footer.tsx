@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { Mail, Clock, MapPin, ArrowUp, Sun, Moon, Send } from 'lucide-react';
+import { Mail, Clock, MapPin, ArrowUp, Sun, Moon, Send, Phone } from 'lucide-react';
 import { useLanyard } from '../../hooks/useLanyard';
 import { useLenis } from 'lenis/react';
 import Image from 'next/image';
@@ -100,7 +100,7 @@ export default function Footer() {
               <div className="w-10 h-10 rounded-xl bg-gray-100 dark:bg-white/5 flex items-center justify-center text-blue-500">
                 <Mail size={18} />
               </div>
-              <a href="mailto:contact@example.com">contact@example.com</a>
+              <a href="mailto:contact@example.com">nam2442011yt@gmail.com</a>
             </li>
             <li className="flex items-center gap-4 text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-all transform hover:translate-x-1">
               <div className="w-10 h-10 rounded-xl bg-gray-100 dark:bg-white/5 flex items-center justify-center text-blue-500">
@@ -114,8 +114,13 @@ export default function Footer() {
               </div>
               <span>Việt Trì, Phú Thọ, Việt Nam</span>
             </li>
+            <li className="flex items-center gap-4 text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-all transform hover:translate-x-1">
+              <div className="w-10 h-10 rounded-xl bg-gray-100 dark:bg-white/5 flex items-center justify-center text-blue-500">
+                <Phone size={18} />
+              </div>
+              <span>0862937543</span>
+            </li>
           </ul>
-
           <div className="flex gap-4 mt-2">
             <a
               href="https://github.com/TrnHatNamX"
