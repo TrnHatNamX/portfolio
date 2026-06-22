@@ -85,7 +85,7 @@ export default function Navbar() {
             {/* Logo */}
             <div className="flex items-center gap-2.5">
                 <Image
-                    src="/logo.png"
+                    src="/logo.webp"
                     alt="TrAvis Logo"
                     width={200}
                     height={96}
