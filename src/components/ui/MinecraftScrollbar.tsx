@@ -28,11 +28,11 @@ export default function MinecraftScrollbar() {
     const handleScroll = () => {
       updateScroll();
       setIsScrolling(true);
-      
+
       if (scrollTimeout.current) {
         clearTimeout(scrollTimeout.current);
       }
-      
+
       scrollTimeout.current = setTimeout(() => {
         setIsScrolling(false);
       }, 1500); // Hide after 1.5s of no scroll
@@ -53,27 +53,27 @@ export default function MinecraftScrollbar() {
     e.preventDefault();
     isDragging.current = true;
     setIsScrolling(true);
-    
+
     if (scrollTimeout.current) clearTimeout(scrollTimeout.current);
 
     const handlePointerMove = (moveEvent: PointerEvent) => {
       if (!containerRef.current) return;
       const rect = containerRef.current.getBoundingClientRect();
       const thumbSize = 24;
-      
+
       // Calculate new percentage based on mouse position within the track
       // Mouse Y relative to the track
       let newY = moveEvent.clientY - rect.top;
-      
+
       // Adjust to consider the center of the thumb
       newY = newY - thumbSize / 2;
-      
+
       // Clamp between 0 and max travel distance
       const maxTravel = rect.height - thumbSize;
       newY = Math.max(0, Math.min(newY, maxTravel));
-      
+
       const percentage = newY / maxTravel;
-      
+
       // Update local state for instant feedback
       setScrollY(percentage * 100);
 
@@ -86,7 +86,7 @@ export default function MinecraftScrollbar() {
       isDragging.current = false;
       window.removeEventListener('pointermove', handlePointerMove);
       window.removeEventListener('pointerup', handlePointerUp);
-      
+
       // Resume hide timeout
       scrollTimeout.current = setTimeout(() => {
         setIsScrolling(false);
@@ -108,7 +108,7 @@ export default function MinecraftScrollbar() {
   }
 
   return (
-    <div 
+    <div
       ref={containerRef}
       className={`fixed top-0 right-0 h-screen w-6 z-[9999] transition-all duration-700 flex justify-center ${visible ? 'opacity-100 blur-0' : 'opacity-0 blur-md'}`}
       onMouseEnter={() => setIsHovered(true)}
@@ -116,12 +116,12 @@ export default function MinecraftScrollbar() {
     >
       {/* The Track (Thin line, with blur) */}
       <div className="absolute top-0 bottom-0 w-[2px] bg-black/10 dark:bg-white/10 backdrop-blur-sm shadow-[0_0_10px_rgba(255,255,255,0.2)]"></div>
-      
+
       {/* The Thumb */}
-      <div 
+      <div
         className="absolute w-6 h-6 cursor-grab active:cursor-grabbing transition-transform duration-100 hover:scale-110"
         onPointerDown={handlePointerDown}
-        style={{ 
+        style={{
           top: `calc(${scrollY}% - ${scrollY / 100 * 24}px)`,
           backgroundImage: isHovered ? dirtBlockHoverSvg : dirtBlockSvg,
           backgroundSize: '100% 100%',
