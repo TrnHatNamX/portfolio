@@ -2,7 +2,7 @@ import React from 'react';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import FloatingCard from '../components/cards/FloatingCard';
-import { Heart, AtSign, Music } from 'lucide-react';
+import { Heart, AtSign, Gamepad2 } from 'lucide-react';
 import Navbar from '../components/layout/Navbar';
 import DiscordProfileCard from '../components/cards/DiscordProfileCard';
 import OrbitingTechStack from '../components/ui/OrbitingTechStack';
@@ -32,10 +32,10 @@ const gameDesignIcons = [
 export default function Home() {
 
   const cards = [
-    { title: "Donate", href: "https://buymeacoffee.com/travis__", icon: <Heart /> },
+    { title: "Donate", href: "/connect?tab=donate", icon: <Heart /> },
     { title: "Repositories", href: "https://github.com/TrnHatNamX", icon: <i className="devicon-github-original text-2xl" /> },
-    { title: "Contact", href: "nam2442011yt@gmail.com", icon: <AtSign /> },
-    { title: "Songs", href: "#", icon: <Music /> },
+    { title: "Contact", href: "/connect?tab=contact", icon: <AtSign /> },
+    { title: "Gear", href: "/gear", icon: <Gamepad2 /> },
   ];
 
   return (
@@ -43,7 +43,7 @@ export default function Home() {
       {/* Background Image with Invert for Dark Mode */}
       <div className="fixed inset-0 z-0 transition-all duration-500 dark:invert pointer-events-none">
         <Image 
-          src="/background.png" 
+          src="/background.webp" 
           alt="Background" 
           fill 
           priority

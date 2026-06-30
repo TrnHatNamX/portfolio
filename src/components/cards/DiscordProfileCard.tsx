@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState, useRef } from 'react';
-import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import { motion, useMotionValue, useSpring, useTransform, useMotionTemplate } from 'framer-motion';
 import Image from 'next/image';
 
 const DISCORD_ID = "885340096272941127";
@@ -33,8 +33,13 @@ export default function DiscordProfileCard() {
   const mouseXSpring = useSpring(x, { stiffness: 150, damping: 15 });
   const mouseYSpring = useSpring(y, { stiffness: 150, damping: 15 });
 
-  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["12deg", "-12deg"]);
-  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-12deg", "12deg"]);
+  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["20deg", "-20deg"]);
+  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-20deg", "20deg"]);
+  
+  const glareX = useTransform(mouseXSpring, [-0.5, 0.5], ["0%", "100%"]);
+  const glareY = useTransform(mouseYSpring, [-0.5, 0.5], ["0%", "100%"]);
+  
+  const glareBackground = useMotionTemplate`radial-gradient(circle at ${glareX} ${glareY}, rgba(255,255,255,0.2) 0%, transparent 60%)`;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -128,16 +133,24 @@ export default function DiscordProfileCard() {
       ref={ref}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      style={{ rotateX, rotateY, transformStyle: "preserve-3d", perspective: 1000 }}
-      className="relative z-50 w-[500px] rounded-[32px] overflow-hidden text-black dark:text-white cursor-pointer select-none shadow-[0_30px_60px_-15px_rgba(0,0,0,0.5)] dark:shadow-[0_0_80px_rgba(255,255,255,0.15)] transition-shadow duration-500 hover:shadow-[0_30px_80px_-15px_rgba(0,0,0,0.6)] dark:hover:shadow-[0_0_120px_rgba(255,255,255,0.25)]"
+      style={{ rotateX, rotateY, transformStyle: "preserve-3d", perspective: 1200 }}
+      className="relative z-50 w-[500px] rounded-[32px] overflow-hidden text-black dark:text-white cursor-pointer select-none shadow-[0_30px_60px_-15px_rgba(0,0,0,0.3)] dark:shadow-[0_0_80px_rgba(255,255,255,0.05)] transition-shadow duration-500 hover:shadow-[0_30px_80px_-15px_rgba(255,255,255,0.5)] dark:hover:shadow-[0_0_120px_rgba(255,255,255,0.2)] group bg-transparent"
     >
-      {/* Background with White/Dark Glassmorphism */}
-      <div className="absolute inset-0 bg-gradient-to-b from-white/90 to-white/60 dark:from-black/80 dark:to-black/50 backdrop-blur-3xl z-0 border border-black/10 dark:border-white/10" />
+      {/* Glare Effect */}
+      <motion.div
+        className="absolute inset-0 pointer-events-none rounded-[32px] z-50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+        style={{
+          background: glareBackground,
+        }}
+      />
+
+      {/* Background with Neutral Glassmorphism */}
+      <div className="absolute inset-0 bg-white/10 dark:bg-black/20 backdrop-blur-xl z-0 border border-white/40 dark:border-white/10" />
 
       {/* Solid Top Banner portion */}
-      <div className="absolute top-0 left-0 w-full h-[144px] bg-black/5 dark:bg-white/5 z-0 border-b border-black/5 dark:border-white/5" />
+      <div className="absolute top-0 left-0 w-full h-[144px] bg-black/5 dark:bg-white/5 z-0 border-b border-black/10 dark:border-white/10" />
 
-      <div className="relative z-10 p-6 pt-16 flex flex-col gap-6" style={{ transform: "translateZ(30px)" }}>
+      <div className="relative z-10 p-6 pt-16 flex flex-col gap-6" style={{ transform: "translateZ(60px)", transformStyle: "preserve-3d" }}>
 
         {/* Header: Avatar, Status Bubble, and Badges */}
         <div className="flex justify-between items-start">
@@ -157,6 +170,8 @@ export default function DiscordProfileCard() {
                   src={avatarDecoration}
                   alt="Decoration"
                   fill
+                  sizes="96px"
+                  unoptimized
                   className="scale-[1.2] pointer-events-none object-cover"
                 />
               )}
@@ -197,7 +212,7 @@ export default function DiscordProfileCard() {
         </div>
 
         {/* User Info Card with New Titles */}
-        <div className="mt-2 flex-grow bg-black/5 dark:bg-black/30 backdrop-blur-md rounded-2xl p-8 shadow-inner border border-black/5 dark:border-white/10 flex flex-col items-center justify-center text-center gap-4 min-h-[312px]">
+        <div className="mt-2 flex-grow bg-white/10 dark:bg-black/20 backdrop-blur-md rounded-2xl p-8 shadow-inner border border-white/20 dark:border-white/10 flex flex-col items-center justify-center text-center gap-4 min-h-[312px]" style={{ transform: "translateZ(30px)" }}>
 
           <div className="flex items-center gap-2 mb-1">
             <h1 className="text-2xl font-bold tracking-wide text-black dark:text-white">{lanyard?.discord_user?.username || 'niang1_'}</h1>
@@ -220,7 +235,13 @@ export default function DiscordProfileCard() {
           {/* Detailed Activity Block */}
           {lanyard?.spotify ? (
             <div className="w-full flex items-center gap-3 bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/10 rounded-xl p-3 text-left animate-fadeIn">
-              <Image src={spotifyImgUrl || 'https://via.placeholder.com/56/1e2128/ffffff?text=Spotify'} width={56} height={56} className="w-14 h-14 rounded-lg object-cover" alt="Spotify" />
+              {spotifyImgUrl ? (
+                <Image src={spotifyImgUrl} width={56} height={56} className="w-14 h-14 rounded-lg object-cover" alt="Spotify" />
+              ) : (
+                <div className="w-14 h-14 rounded-lg bg-black/10 dark:bg-white/10 flex items-center justify-center">
+                  <span className="text-xs font-bold text-black/50 dark:text-white/50">SP</span>
+                </div>
+              )}
               <div className="flex flex-col overflow-hidden min-w-0">
                 <span className="font-bold text-[0.95rem] text-black dark:text-white truncate">{lanyard.spotify.song}</span>
                 <span className="text-[0.8rem] text-black/70 dark:text-white/70 truncate">by {lanyard.spotify.artist}</span>
@@ -228,7 +249,13 @@ export default function DiscordProfileCard() {
             </div>
           ) : playingActivity ? (
             <div className="w-full flex items-center gap-3 bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/10 rounded-xl p-3 text-left animate-fadeIn">
-              <Image src={activityImgUrl || 'https://via.placeholder.com/56/1e2128/ffffff?text=App'} width={56} height={56} className="w-14 h-14 rounded-lg object-cover bg-black/10 dark:bg-white/10" alt="Activity" />
+              {activityImgUrl ? (
+                <Image src={activityImgUrl} width={56} height={56} className="w-14 h-14 rounded-lg object-cover" alt="Activity" />
+              ) : (
+                <div className="w-14 h-14 rounded-lg bg-black/10 dark:bg-white/10 flex items-center justify-center">
+                  <span className="text-xs font-bold text-black/50 dark:text-white/50">APP</span>
+                </div>
+              )}
               <div className="flex flex-col overflow-hidden min-w-0">
                 <span className="font-bold text-[0.95rem] text-black dark:text-white truncate">{playingActivity.name}</span>
                 {playingActivity.details && (

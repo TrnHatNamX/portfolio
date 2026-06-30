@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { Sun, Moon } from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 // Cấu hình ID Discord của bạn ở đây.
 // Mặc định sử dụng ID mẫu: 885340096272941127
@@ -84,14 +85,17 @@ export default function Navbar() {
         <nav className="w-full py-6 px-4 md:px-8 max-w-6xl mx-auto flex items-center justify-between relative z-50">
             {/* Logo */}
             <div className="flex items-center gap-2.5">
-                <Image
-                    src="/logo.webp"
-                    alt="TrAvis Logo"
-                    width={200}
-                    height={96}
-                    priority
-                    className="h-20 sm:h-24 w-auto transition-transform sm:transform hover:-rotate-6 dark:invert-0 invert"
-                />
+                <Link href="/">
+                    <Image
+                        src="/logo.webp"
+                        alt="TrAvis Logo"
+                        width={200}
+                        height={96}
+                        priority
+                        style={{ width: 'auto', height: 'auto' }}
+                        className="h-20 sm:h-24 w-auto transition-transform sm:transform hover:-rotate-6 dark:invert-0 invert"
+                    />
+                </Link>
             </div>
 
             {/* Menu bên phải */}

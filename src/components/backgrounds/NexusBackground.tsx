@@ -26,7 +26,7 @@ export default function NexusBackground() {
     
     // Khởi tạo màu ban đầu dựa vào trạng thái class trên HTML
     const initialIsDark = document.documentElement.classList.contains('dark');
-    scene.background = new THREE.Color(initialIsDark ? '#050505' : '#fdfbfb');
+    scene.background = null;
 
     const camera = new THREE.PerspectiveCamera(60, width / height, 0.1, 1000);
     camera.position.z = 150;
@@ -158,11 +158,9 @@ export default function NexusBackground() {
       // LERP (Nội suy) Màu Sắc Khung Hình để đổi nền siêu mượt
       const currentIsDark = document.documentElement.classList.contains('dark');
       
-      const targetBgColor = new THREE.Color(currentIsDark ? '#050505' : '#fdfbfb');
       const targetPointColor = new THREE.Color(currentIsDark ? '#a855f7' : '#3b82f6');
       const targetLineColor = new THREE.Color(currentIsDark ? '#06b6d4' : '#93c5fd');
 
-      (scene.background as THREE.Color).lerp(targetBgColor, 0.04);
       pMaterial.color.lerp(targetPointColor, 0.04);
       lineMaterial.color.lerp(targetLineColor, 0.04);
 

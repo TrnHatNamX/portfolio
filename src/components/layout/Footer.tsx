@@ -78,7 +78,7 @@ export default function Footer() {
   }
 
   return (
-    <footer className="relative bg-white/40 dark:bg-black/40 backdrop-blur-2xl border-t border-black/10 dark:border-white/10 px-8 py-20 overflow-hidden transition-colors duration-500">
+    <footer className="relative bg-white/20 dark:bg-black/20 backdrop-blur-2xl border-t border-black/10 dark:border-white/10 px-8 py-20 overflow-hidden transition-colors duration-500">
       {/* Background Glow */}
       <div className="absolute -top-[150px] left-1/2 -translate-x-1/2 w-[800px] h-[300px] bg-[radial-gradient(circle,rgba(96,165,250,0.08)_0%,transparent_70%)] blur-[50px] pointer-events-none" />
 
@@ -91,31 +91,31 @@ export default function Footer() {
               Zhnaw
             </h2>
             <p className="text-gray-600 dark:text-gray-400 leading-relaxed max-w-md">
-              Lập trình viên đam mê phát triển game với GameMaker, tự động hóa với Python và tối ưu hóa phần cứng PC. Luôn tìm kiếm và học hỏi những công nghệ mới.
+              A Full-Stack developer 2k11 from Vietnam
             </p>
           </div>
 
           <ul className="flex flex-col gap-4">
             <li className="flex items-center gap-4 text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-all transform hover:translate-x-1">
-              <div className="w-10 h-10 rounded-xl bg-gray-100 dark:bg-white/5 flex items-center justify-center text-blue-500">
+              <div className="w-10 h-10 rounded-xl bg-gray-100 dark:bg-white/5 flex items-center justify-center text-neutral-800 dark:text-neutral-300">
                 <Mail size={18} />
               </div>
               <a href="mailto:contact@example.com">hi@zhnaw.dev</a>
             </li>
             <li className="flex items-center gap-4 text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-all transform hover:translate-x-1">
-              <div className="w-10 h-10 rounded-xl bg-gray-100 dark:bg-white/5 flex items-center justify-center text-blue-500">
+              <div className="w-10 h-10 rounded-xl bg-gray-100 dark:bg-white/5 flex items-center justify-center text-neutral-800 dark:text-neutral-300">
                 <Clock size={18} />
               </div>
               <span>UTC +7 (Asia/Ho_Chi_Minh)</span>
             </li>
             <li className="flex items-center gap-4 text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-all transform hover:translate-x-1">
-              <div className="w-10 h-10 rounded-xl bg-gray-100 dark:bg-white/5 flex items-center justify-center text-blue-500">
+              <div className="w-10 h-10 rounded-xl bg-gray-100 dark:bg-white/5 flex items-center justify-center text-neutral-800 dark:text-neutral-300">
                 <MapPin size={18} />
               </div>
               <span>Việt Trì, Phú Thọ, Việt Nam</span>
             </li>
             <li className="flex items-center gap-4 text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-all transform hover:translate-x-1">
-              <div className="w-10 h-10 rounded-xl bg-gray-100 dark:bg-white/5 flex items-center justify-center text-blue-500">
+              <div className="w-10 h-10 rounded-xl bg-gray-100 dark:bg-white/5 flex items-center justify-center text-neutral-800 dark:text-neutral-300">
                 <Phone size={18} />
               </div>
               <span>0862937543</span>
@@ -126,7 +126,7 @@ export default function Footer() {
               href="https://github.com/TrnHatNamX"
               target="_blank"
               rel="noreferrer"
-              className="w-12 h-12 rounded-2xl bg-gray-100 dark:bg-white/5 flex items-center justify-center text-gray-800 dark:text-white border border-black/10 dark:border-white/10 hover:bg-blue-500 hover:text-white hover:border-blue-500 transition-all hover:-translate-y-1 hover:shadow-lg hover:shadow-blue-500/30"
+              className="w-12 h-12 rounded-2xl bg-gray-100 dark:bg-white/5 flex items-center justify-center text-gray-800 dark:text-white border border-black/10 dark:border-white/10 hover:bg-gray-200 dark:hover:bg-neutral-800 hover:border-gray-300 dark:hover:border-neutral-700 transition-all hover:-translate-y-1 hover:shadow-lg hover:shadow-black/10"
             >
               <i className="devicon-github-original text-xl" />
             </a>
@@ -134,7 +134,7 @@ export default function Footer() {
               href="#"
               target="_blank"
               rel="noreferrer"
-              className="w-12 h-12 rounded-2xl bg-gray-100 dark:bg-white/5 flex items-center justify-center text-gray-800 dark:text-white border border-black/10 dark:border-white/10 hover:bg-blue-500 hover:text-white hover:border-blue-500 transition-all hover:-translate-y-1 hover:shadow-lg hover:shadow-blue-500/30"
+              className="w-12 h-12 rounded-2xl bg-gray-100 dark:bg-white/5 flex items-center justify-center text-gray-800 dark:text-white border border-black/10 dark:border-white/10 hover:bg-gray-200 dark:hover:bg-neutral-800 hover:border-gray-300 dark:hover:border-neutral-700 transition-all hover:-translate-y-1 hover:shadow-lg hover:shadow-black/10"
             >
               <Send size={20} />
             </a>
@@ -150,9 +150,8 @@ export default function Footer() {
                 <Image
                   src={
                     lanyard?.discord_user?.avatar
-                      ? `https://cdn.discordapp.com/avatars/${lanyard.discord_user.id}/${lanyard.discord_user.avatar}.${lanyard.discord_user.avatar.startsWith('a_') ? 'gif' : 'png'
-                      }?size=128`
-                      : 'https://via.placeholder.com/64/1e2128/ffffff?text=DS'
+                      ? `https://cdn.discordapp.com/avatars/${lanyard.discord_user.id}/${lanyard.discord_user.avatar}.${lanyard.discord_user.avatar.startsWith('a_') ? 'gif' : 'png'}?size=128`
+                      : 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'
                   }
                   alt="Discord Avatar"
                   width={64}
@@ -176,13 +175,19 @@ export default function Footer() {
 
             {activity && (
               <div className="bg-gray-50 dark:bg-white/5 border border-black/5 dark:border-white/10 rounded-2xl p-4 flex items-center gap-4 animate-fadeIn">
-                <Image
-                  src={activityImgUrl || 'https://via.placeholder.com/56/1e2128/ffffff?text=App'}
-                  alt="Activity"
-                  width={56}
-                  height={56}
-                  className="w-14 h-14 rounded-xl object-cover bg-gray-200 dark:bg-black/50"
-                />
+                {activityImgUrl ? (
+                  <Image
+                    src={activityImgUrl}
+                    alt="Activity Icon"
+                    width={56}
+                    height={56}
+                    className="rounded-lg object-cover bg-black/5 dark:bg-white/5"
+                  />
+                ) : (
+                  <div className="w-14 h-14 rounded-lg bg-black/10 dark:bg-white/10 flex items-center justify-center">
+                    <span className="text-xs font-bold text-black/50 dark:text-white/50">APP</span>
+                  </div>
+                )}
                 <div className="flex flex-col overflow-hidden min-w-0">
                   <span className="font-semibold text-[0.95rem] text-black dark:text-white truncate">
                     {activity.name}
@@ -215,14 +220,14 @@ export default function Footer() {
       <div className="fixed bottom-8 right-8 flex flex-col gap-4 z-50">
         <button
           onClick={toggleTheme}
-          className="w-[52px] h-[52px] rounded-full bg-white/80 dark:bg-white/10 backdrop-blur-md border border-black/10 dark:border-white/10 flex items-center justify-center text-black dark:text-white shadow-lg hover:scale-110 hover:-translate-y-1 hover:bg-blue-500 hover:text-white hover:border-blue-500 transition-all"
+          className="w-[52px] h-[52px] rounded-full bg-white/80 dark:bg-white/10 backdrop-blur-md border border-black/10 dark:border-white/10 flex items-center justify-center text-black dark:text-white shadow-lg hover:scale-110 hover:-translate-y-1 hover:bg-gray-200 dark:hover:bg-neutral-800 hover:border-gray-300 dark:hover:border-neutral-700 transition-all"
           aria-label="Toggle Theme"
         >
           {isDark ? <Sun size={22} /> : <Moon size={22} />}
         </button>
         <button
           onClick={scrollToTop}
-          className={`w-[52px] h-[52px] rounded-full bg-white/80 dark:bg-white/10 backdrop-blur-md border border-black/10 dark:border-white/10 flex items-center justify-center text-black dark:text-white shadow-lg hover:scale-110 hover:-translate-y-1 hover:bg-blue-500 hover:text-white hover:border-blue-500 transition-all ${showScrollTop ? 'opacity-100 translate-y-0 visible' : 'opacity-0 translate-y-4 invisible'
+          className={`w-[52px] h-[52px] rounded-full bg-white/80 dark:bg-white/10 backdrop-blur-md border border-black/10 dark:border-white/10 flex items-center justify-center text-black dark:text-white shadow-lg hover:scale-110 hover:-translate-y-1 hover:bg-gray-200 dark:hover:bg-neutral-800 hover:border-gray-300 dark:hover:border-neutral-700 transition-all ${showScrollTop ? 'opacity-100 translate-y-0 visible' : 'opacity-0 translate-y-4 invisible'
             }`}
           aria-label="Scroll to Top"
         >
