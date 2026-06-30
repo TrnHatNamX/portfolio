@@ -150,10 +150,10 @@ export default function DiscordProfileCard() {
       {/* Solid Top Banner portion */}
       <div className="absolute top-0 left-0 w-full h-[144px] bg-black/5 dark:bg-white/5 z-0 border-b border-black/10 dark:border-white/10" />
 
-      <div className="relative z-10 p-6 pt-16 flex flex-col gap-6" style={{ transform: "translateZ(60px)", transformStyle: "preserve-3d" }}>
+      <div className="relative z-10 p-6 pt-16 flex flex-col gap-6" style={{ transformStyle: "preserve-3d" }}>
 
         {/* Header: Avatar, Status Bubble, and Badges */}
-        <div className="flex justify-between items-start">
+        <div className="flex justify-between items-start" style={{ transform: "translateZ(60px)", transformStyle: "preserve-3d" }}>
 
           <div className="relative">
             {/* Avatar Frame Wrapper */}
@@ -212,10 +212,10 @@ export default function DiscordProfileCard() {
         </div>
 
         {/* User Info Card with New Titles */}
-        <div className="mt-2 flex-grow bg-white/10 dark:bg-black/20 backdrop-blur-md rounded-2xl p-8 shadow-inner border border-white/20 dark:border-white/10 flex flex-col items-center justify-center text-center gap-4 min-h-[312px]" style={{ transform: "translateZ(30px)" }}>
+        <div className="mt-2 flex-grow bg-white/10 dark:bg-black/20 backdrop-blur-md rounded-2xl p-8 shadow-inner border border-white/20 dark:border-white/10 flex flex-col items-center justify-center text-center gap-4 min-h-[312px]">
 
           <div className="flex items-center gap-2 mb-1">
-            <h1 className="text-2xl font-bold tracking-wide text-black dark:text-white">{lanyard?.discord_user?.username || 'niang1_'}</h1>
+            <h1 className="text-2xl font-bold tracking-wide text-black dark:text-white [text-shadow:_0_0_15px_rgb(0_0_0_/_30%)] dark:[text-shadow:_0_0_15px_rgb(255_255_255_/_40%)]">{lanyard?.discord_user?.username || 'niang1_'}</h1>
             {clan && (
               <div className="flex items-center gap-1 bg-black/10 dark:bg-black/40 backdrop-blur-md rounded-md px-2 py-0.5 border border-black/5 dark:border-white/10">
                 {clan.badge && (
@@ -228,8 +228,8 @@ export default function DiscordProfileCard() {
 
           {/* Added Titles */}
           <div className="flex flex-col items-center gap-0.5">
-            <h2 className="text-sm font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-widest">Full-Stack Developer</h2>
-            <h3 className="text-[11px] font-semibold text-black/60 dark:text-white/50 uppercase tracking-widest">AI & Server</h3>
+            <h2 className="text-sm font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-widest [text-shadow:_0_0_10px_rgb(79_70_229_/_40%)] dark:[text-shadow:_0_0_10px_rgb(129_140_248_/_40%)]">Full-Stack Developer</h2>
+            <h3 className="text-[11px] font-semibold text-black/60 dark:text-white/50 uppercase tracking-widest [text-shadow:_0_0_10px_rgb(0_0_0_/_20%)] dark:[text-shadow:_0_0_10px_rgb(255_255_255_/_20%)]">AI & Server</h3>
           </div>
 
           {/* Detailed Activity Block */}

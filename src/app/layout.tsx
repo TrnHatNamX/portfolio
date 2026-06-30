@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import React from "react";
 import LenisProvider from "../components/layout/LenisProvider";
+import MinecraftScrollbar from "../components/ui/MinecraftScrollbar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,6 +33,7 @@ export default function RootLayout({
     >
       <body suppressHydrationWarning className="min-h-full flex flex-col bg-gray-50 dark:bg-neutral-900 text-black dark:text-white transition-colors">
         <LenisProvider>
+          <MinecraftScrollbar />
           {children}
         </LenisProvider>
       </body>
