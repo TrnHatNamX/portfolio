@@ -13,7 +13,7 @@ const Footer = dynamic(() => import('../../components/layout/Footer'));
 export default function ConnectPage() {
   const searchParams = useSearchParams();
   const [activeTab, setActiveTab] = useState<'contact' | 'donate'>('contact');
-  const [copied, setCopied] = useState(false);
+  const [copiedItem, setCopiedItem] = useState<string | null>(null);
 
   useEffect(() => {
     const tab = searchParams.get('tab');
@@ -24,10 +24,10 @@ export default function ConnectPage() {
     }
   }, [searchParams]);
 
-  const copyEmail = () => {
-    navigator.clipboard.writeText('hi@zhnaw.dev');
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+  const handleCopy = (text: string, itemName: string) => {
+    navigator.clipboard.writeText(text);
+    setCopiedItem(itemName);
+    setTimeout(() => setCopiedItem(null), 2000);
   };
 
   const GithubSVG = ({ size = 24, className = "" }: any) => (
@@ -44,8 +44,8 @@ export default function ConnectPage() {
   );
 
   const socials = [
-    { name: 'Phone', value: '0862937543', icon: Phone, href: 'tel:0862937543' },
-    { name: 'Email', value: 'hi@zhnaw.dev', icon: Mail, action: copyEmail },
+    { name: 'Phone', value: '0862937543', icon: Phone, action: () => handleCopy('0862937543', 'Phone') },
+    { name: 'Email', value: 'hi@zhnaw.dev', icon: Mail, action: () => handleCopy('hi@zhnaw.dev', 'Email') },
     { name: 'GitHub', value: 'TrnHatNamX', icon: GithubSVG, href: 'https://github.com/TrnHatNamX' },
     { name: 'Facebook', value: 'Nam Trần Nhật', icon: FacebookSVG, href: 'https://www.facebook.com/nam.trannhat.18294/?locale=vi_VN' },
     { name: 'TikTok', value: '@naht_n4m', icon: Video, href: 'https://www.tiktok.com/@naht_n4m' },
@@ -92,18 +92,19 @@ export default function ConnectPage() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-3 w-full max-w-3xl">
                       {socials.map((social, idx) => {
                         const Icon = social.icon;
-                        const isEmail = social.name === 'Email';
+                        const isCopied = copiedItem === social.name;
+                        const isCopyable = social.action !== undefined;
                         const Card = (
                           <div className="flex items-center gap-4 p-4 bg-white/40 dark:bg-black/30 hover:bg-white/80 dark:hover:bg-black/60 border border-black/10 dark:border-white/10 rounded-2xl transition-all group cursor-pointer">
                             <div className="p-3 bg-neutral-200/50 dark:bg-neutral-800/50 text-neutral-800 dark:text-neutral-200 rounded-xl group-hover:scale-110 group-hover:bg-neutral-800 group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-black transition-all">
-                              {isEmail && copied ? <Check size={20} className="text-green-500" /> : <Icon size={20} />}
+                              {isCopied ? <Check size={20} className="text-green-500" /> : <Icon size={20} />}
                             </div>
                             <div className="flex flex-col flex-1">
                               <span className="text-xs font-semibold text-neutral-500 uppercase tracking-widest">{social.name}</span>
                               <span className="font-mono text-neutral-800 dark:text-neutral-200 font-bold">{social.value}</span>
                             </div>
-                            {!isEmail && <ExternalLink size={16} className="text-neutral-400 group-hover:text-black dark:group-hover:text-white transition-colors" />}
-                            {isEmail && <Copy size={16} className="text-neutral-400 group-hover:text-black dark:group-hover:text-white transition-colors" />}
+                            {!isCopyable && <ExternalLink size={16} className="text-neutral-400 group-hover:text-black dark:group-hover:text-white transition-colors" />}
+                            {isCopyable && <Copy size={16} className="text-neutral-400 group-hover:text-black dark:group-hover:text-white transition-colors" />}
                           </div>
                         );
 

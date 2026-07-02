@@ -82,7 +82,7 @@ export default function Navbar() {
     };
 
     return (
-        <nav className="w-full py-6 px-4 md:px-8 max-w-6xl mx-auto flex items-center justify-between relative z-50">
+        <nav className="w-full py-6 px-4 max-w-[95vw] sm:max-w-[90vw] mx-auto flex items-center justify-between relative z-50">
             {/* Logo */}
             <div className="flex items-center gap-2.5">
                 <Link href="/">
@@ -93,7 +93,7 @@ export default function Navbar() {
                         height={96}
                         priority
                         style={{ width: 'auto', height: 'auto' }}
-                        className="h-20 sm:h-24 w-auto transition-transform sm:transform hover:-rotate-6 dark:invert-0 invert"
+                        className="h-20 sm:h-24 w-auto transition-all duration-300 hover:scale-[0.85] hover:-rotate-3 dark:invert-0 invert scale-80 origin-center"
                     />
                 </Link>
             </div>

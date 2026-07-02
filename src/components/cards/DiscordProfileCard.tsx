@@ -3,6 +3,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { motion, useMotionValue, useSpring, useTransform, useMotionTemplate } from 'framer-motion';
 import Image from 'next/image';
+import { Skeleton } from '@/components/ui/Skeleton';
 
 const DISCORD_ID = "885340096272941127";
 
@@ -85,7 +86,11 @@ export default function DiscordProfileCard() {
     y.set(0);
   };
 
-  if (loading) return null;
+  if (loading) {
+    return (
+      <Skeleton className="relative z-50 w-[500px] h-[550px] rounded-[32px] shadow-[0_30px_60px_-15px_rgba(0,0,0,0.3)] dark:shadow-[0_0_80px_rgba(255,255,255,0.05)]" />
+    );
+  }
 
   // Extracted Data
   const avatarUrl = lanyard?.discord_user?.avatar
